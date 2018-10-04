@@ -1,0 +1,8 @@
+com/demo/helidon/DummyUserStore$DummyUser.class
+com/demo/helidon/greet/GreetApplication.class
+com/demo/helidon/MainWS.class
+com/demo/helidon/Main.class
+com/demo/helidon/greet/GreetResource.class
+com/demo/helidon/people/PersonsService.class
+com/demo/helidon/DummyUserStore.class
+com/demo/helidon/people/PeopleResource.class

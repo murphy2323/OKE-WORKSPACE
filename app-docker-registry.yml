@@ -1,0 +1,49 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: helidon-database-demo
+  labels:
+    app: helidon-database-demo
+spec:
+  type: LoadBalancer
+  selector:
+    app: helidon-database-demo
+  ports:
+  - port: 8080
+    targetPort: 8080
+    name: http
+---
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: helidon-database-demo
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: helidon-database-demo
+        version: v1
+    spec:
+      containers:
+      - name: helidon-database-demo
+        image: murphy2323/helidon-database-demo:latest
+        imagePullPolicy: Always
+        env:
+          - name: SECRET_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: demo-database-db-params
+                key: javax_persistence_jdbc_user
+          - name: SECRET_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: demo-database-db-params
+                key: javax_persistence_jdbc_password
+          - name: SECRET_DBURL
+            valueFrom:
+              secretKeyRef:
+                name: demo-database-db-params
+                key: javax_persistence_jdbc_url
+        ports:
+          - containerPort: 8080

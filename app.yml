@@ -1,0 +1,51 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: bob-helidon-database-demo
+  labels:
+    app: bob-helidon-database-demo
+spec:
+  type: NodePort
+  selector:
+    app: bob-helidon-database-demo
+  ports:
+  - port: 8080
+    targetPort: 8080
+    name: http
+---
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: bob-helidon-database-demo
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: bob-helidon-database-demo
+        version: v1
+    spec:
+      containers:
+      - name: helidon-database-demo
+        image: iad.ocir.io/cloud_pursuit_appdev/murphy/helidon-database-demo:latest
+        imagePullPolicy: Always
+        env:
+          - name: SECRET_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: demo-database-db-params
+                key: javax_persistence_jdbc_user
+          - name: SECRET_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: demo-database-db-params
+                key: javax_persistence_jdbc_password
+          - name: SECRET_DBURL
+            valueFrom:
+              secretKeyRef:
+                name: demo-database-db-params
+                key: javax_persistence_jdbc_url
+        ports:
+          - containerPort: 8080
+      imagePullSecrets:
+        - name: ocirsecret

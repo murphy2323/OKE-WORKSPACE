@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: spark-database-demo-service
+spec:
+  selector:
+    app: spark-database-demo
+  ports:
+  - protocol: TCP
+    port: 4567
+    targetPort: 4567
+  type: NodePort
+#  type: LoadBalancer
