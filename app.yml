@@ -1,13 +1,13 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: bob-helidon-database-demo
+  name: helidon-database-demo
   labels:
-    app: bob-helidon-database-demo
+    app: helidon-database-demo
 spec:
   type: NodePort
   selector:
-    app: bob-helidon-database-demo
+    app: helidon-database-demo
   ports:
   - port: 8080
     targetPort: 8080
@@ -16,13 +16,13 @@ spec:
 kind: Deployment
 apiVersion: extensions/v1beta1
 metadata:
-  name: bob-helidon-database-demo
+  name: helidon-database-demo
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: bob-helidon-database-demo
+        app: helidon-database-demo
         version: v1
     spec:
       containers:
