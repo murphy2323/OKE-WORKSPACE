@@ -30,21 +30,21 @@ spec:
         image: iad.ocir.io/cloud_pursuit_appdev/murphy/helidon-database-demo:latest
         imagePullPolicy: Always
         env:
-          - name: SECRET_USERNAME
+          - name: javax_persistence_jdbc_user
             valueFrom:
               secretKeyRef:
                 name: demo-database-db-params
-                key: javax_persistence_jdbc_user
-          - name: SECRET_PASSWORD
+                key: SECRET_USERNAME
+          - name: javax_persistence_jdbc_password
             valueFrom:
               secretKeyRef:
                 name: demo-database-db-params
-                key: javax_persistence_jdbc_password
-          - name: SECRET_DBURL
+                key: SECRET_PASSWORD
+          - name: javax_persistence_jdbc_url
             valueFrom:
               secretKeyRef:
                 name: demo-database-db-params
-                key: javax_persistence_jdbc_url
+                key: SECRET_DBURL
         ports:
           - containerPort: 8080
       imagePullSecrets:

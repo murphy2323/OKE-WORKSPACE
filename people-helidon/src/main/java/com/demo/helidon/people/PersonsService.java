@@ -45,9 +45,11 @@ public class PersonsService {
 //		Optional<String> user = Optional.ofNullable(System.getenv("javax_persistence_jdbc_user"));
 //		Optional<String> password = Optional.ofNullable(System.getenv("javax_persistence_jdbc_password"));
 
-		Optional<String> url = Optional.ofNullable(System.getenv("SECRET_DBURL"));
-		Optional<String> user = Optional.ofNullable(System.getenv("SECRET_USERNAME"));
-		Optional<String> password = Optional.ofNullable(System.getenv("SECRET_PASSWORD"));
+		System.out.println("------- System environment: " + System.getenv());
+		
+		Optional<String> url = Optional.ofNullable(System.getenv("javax_persistence_jdbc_url"));
+		Optional<String> user = Optional.ofNullable(System.getenv("javax_persistence_jdbc_user"));
+		Optional<String> password = Optional.ofNullable(System.getenv("javax_persistence_jdbc_password"));
 
 		
 		jpaProperties.put("javax.persistence.jdbc.url", url.orElse("jdbc:oracle:thin:@132.145.36.133:1521:orcl").toString());
